@@ -7,7 +7,7 @@ import cors from 'cors';
 dotenv.config();
 const app = express();
 
-const staticPath = path.join(process.cwd(), "../frontend/dist")
+const staticPath = path.join(process.cwd(), "dist")
 app.use(express.static(staticPath))
 app.use(express.json())
 app.use(cors({
