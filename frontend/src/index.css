@@ -17,8 +17,8 @@ body {
     border-radius: 2px;
     font-size: 1rem;
     color: black;
-    overflow-x: auto;
-    overflow-y: hidden;
+    overflow-x: hidden;
+    overflow-y:hidden;
     width: clamp(200px, 60vh, 75%);
 }
 
