@@ -11,7 +11,7 @@ const staticPath = path.join(process.cwd(), "../frontend/dist")
 app.use(express.static(staticPath))
 app.use(express.json())
 app.use(cors({
-    origin: "https://calculator1-0ha8.onrender.com",
+    origin: true,
     methods: ["GET", "POST"], 
     credentials: true
 }))
@@ -38,5 +38,5 @@ app.post("/calculatedegree", (req, res) => {
         res.status(400).json({ error: "Invalid expression" });
     }
 });
-const PORT=process.env.VITE_BACKEND_URL || 8000
+const PORT=process.env.PORT || 8000
 app.listen(PORT)
