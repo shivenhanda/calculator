@@ -38,5 +38,5 @@ app.post("/calculatedegree", (req, res) => {
         res.status(400).json({ error: "Invalid expression" });
     }
 });
-console.log(process.env.VITE_BACKEND_URL);
-app.listen(process.env.VITE_BACKEND_URL)
+const PORT=process.env.VITE_BACKEND_URL || 8000
+app.listen(PORT)
