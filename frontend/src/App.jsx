@@ -107,7 +107,7 @@ export default function App() {
     }
   }
   function radianfetch() {
-    fetch("http://localhost:8000/calculate", {
+    fetch("https://calculator-70if.onrender.com/calculate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ expression: display })
@@ -120,7 +120,7 @@ export default function App() {
       })
   }
   function degreefetch() {
-    fetch("http://localhost:8000/calculatedegree", {
+    fetch("https://calculator-70if.onrender.com/calculatedegree", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ expression: display })
