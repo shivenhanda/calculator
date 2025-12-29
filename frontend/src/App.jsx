@@ -114,7 +114,10 @@ export default function App() {
     }).then(res => res.json())
       .then(data => {
         setpreviousValue(display);
-        setDisplay(data.result.toFixed(decimal))
+        setDisplay(data.result)
+        if(display!="undefined"){
+          setDisplay(data.result.toFixed(decimal))
+        }
       }).catch(err => {
         console.log("Error:", err)
       })
@@ -127,7 +130,10 @@ export default function App() {
     }).then(res => res.json())
       .then(data => {
         setpreviousValue(display);
-        setDisplay(data.result.toFixed(decimal))
+        setDisplay(data.result)
+        if(display!="undefined"){
+          setDisplay(data.result.toFixed(decimal))
+        }
       }).catch(err => {
         console.log("Error:", err)
       })
