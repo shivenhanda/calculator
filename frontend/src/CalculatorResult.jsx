@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+
+
 export default function CalculateResult({ display, action, decimal, setDisplay, setpreviousValue, setLoading }) {
     useEffect(() => {
         const url =
