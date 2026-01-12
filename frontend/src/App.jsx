@@ -74,7 +74,7 @@ export default function App() {
           <div className="btn operator" onClick={() => displayAction("/")}>/</div>
           <div className="btn btn0" onClick={() => displayAction("0")}>0</div>
           <div className="btn btn10" onClick={() => displayAction(".")}>.</div>
-          <div className="btn btn11" onClick={() => calculate(display)}>{loading?"Calculating":"="}</div>
+          <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>{loading?"Calculating":"="}</div>
           <div className="btn operator" onClick={clearDisplay}>C</div>
           <div className="btn operator" onClick={() => displayAction("(")}>(</div>
           <div className="btn operator" onClick={() => displayAction(")")}> )</div>

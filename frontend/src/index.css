@@ -87,3 +87,7 @@ body {
 #decimalhandle input {
     text-align: center;
 }
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
