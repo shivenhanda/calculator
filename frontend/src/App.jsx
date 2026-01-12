@@ -2,7 +2,7 @@ import React, { lazy, useState, Suspense } from "react";
 import { useEffect } from "react";
 import "./index.css";
 import { useRef } from "react";
-const CalculatorResult = lazy(() => import("./CalculateResult"));
+const CalculatorResult = lazy(() => import("./CalculateResult.jsx"));
 
 export default function App() {
   const [display, setDisplay] = useState("");
