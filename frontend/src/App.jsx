@@ -10,7 +10,7 @@ export default function App() {
   const [action, setAction] = useState("Degree");
   const [loading,setLoading]=useState(false)
   const inputRef = useRef(null);
-  const CalculatorResult = lazy(() => import("./CalculatorResult"));
+  const CalculatorResult = lazy(() => import("./CalculateResult"));
   function handleInput(value) {
     setDecimal(value)
     if (isNaN(value)) {
