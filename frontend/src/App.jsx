@@ -99,7 +99,7 @@ export default function App() {
         </div>
       </div>
       {
-        loading ? <p>"Calculating"</p> : ""
+        loading ? <p style={{textAlign:"center"}}>Calculating...</p> : ""
       }
       < div id="decimalhandle">
         <input type="number" onChange={(event) => { handleInput(event.target.value) }} placeholder="Enter Decimal:" id="decimalInput" />

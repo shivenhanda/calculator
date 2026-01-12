@@ -37,6 +37,7 @@ body {
     gap: 10px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     padding: 10px;
+    padding-right: 0;
     border-radius: 10px;
     width: clamp(200px, 55vh, 100%);
     margin: 5px;
