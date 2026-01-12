@@ -75,7 +75,7 @@ export default function App() {
           <div className="btn operator" onClick={() => displayAction("/")}>/</div>
           <div className="btn btn0" onClick={() => displayAction("0")}>0</div>
           <div className="btn btn10" onClick={() => displayAction(".")}>.</div>
-          <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>{loading ? "Calculating" : "="}</div>
+          <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>=</div>
           <Suspense fallback={null}>
             {loading && (
               <CalculatorResult
@@ -98,10 +98,13 @@ export default function App() {
           <div className="btn operator back" onClick={() => back()}>Back</div>
         </div>
       </div>
-      <div id="decimalhandle">
+      {
+        loading ? <p>"Calculating"</p> : ""
+      }
+      < div id="decimalhandle">
         <input type="number" onChange={(event) => { handleInput(event.target.value) }} placeholder="Enter Decimal:" id="decimalInput" />
         <p>Current Decimal:{decimal}</p>
-      </div>
+      </div >
     </>
   );
   function actionHandle() {
