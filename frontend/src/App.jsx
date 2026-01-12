@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { lazy, useState,Suspense } from "react";
 import { useEffect } from "react";
 import "./index.css";
 import { useRef } from "react";
@@ -10,6 +10,7 @@ export default function App() {
   const [action, setAction] = useState("Degree");
   const [loading,setLoading]=useState(false)
   const inputRef = useRef(null);
+  const CalculatorResult = lazy(() => import("./CalculatorResult"));
   function handleInput(value) {
     setDecimal(value)
     if (isNaN(value)) {
@@ -75,6 +76,9 @@ export default function App() {
           <div className="btn btn0" onClick={() => displayAction("0")}>0</div>
           <div className="btn btn10" onClick={() => displayAction(".")}>.</div>
           <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>{loading?"Calculating":"="}</div>
+          {
+            loading?<CalculatorResult display={display} action={action} decimal={decimal} setDisplay={setDisplay} setpreviousValue={setpreviousValue} setLoading={setLoading}/>:""
+          }
           <div className="btn operator" onClick={clearDisplay}>C</div>
           <div className="btn operator" onClick={() => displayAction("(")}>(</div>
           <div className="btn operator" onClick={() => displayAction(")")}> )</div>
@@ -104,44 +108,6 @@ export default function App() {
       return;
     }
     setLoading(true)
-    if (action == "Radian") {
-      radianfetch();
-    }
-    else {
-      degreefetch();
-    }
-  }
-  function radianfetch() {
-    fetch("https://calculator-70if.onrender.com/calculate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ expression: display })
-    }).then(res => res.json())
-      .then(data => {
-        setpreviousValue(display);
-        setDisplay(data.result)
-        if(display!="undefined"){
-          setDisplay(data.result.toFixed(decimal))
-        }
-      }).catch(err => {
-        console.log("Error:", err)
-      }).finally(()=>setLoading(false))
-  }
-  function degreefetch() {
-    fetch("https://calculator-70if.onrender.com/calculatedegree", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ expression: display })
-    }).then(res => res.json())
-      .then(data => {
-        setpreviousValue(display);
-        setDisplay(data.result)
-        if(display!="undefined"){
-          setDisplay(data.result.toFixed(decimal))
-        }
-      }).catch(err => {
-        console.log("Error:", err)
-      }).finally(()=>setLoading(false))
   }
   function back() {
     if (display === "") {
