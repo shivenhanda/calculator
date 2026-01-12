@@ -8,6 +8,7 @@ export default function App() {
   const [decimal, setDecimal] = useState(10);
   const [previousValue, setpreviousValue] = useState("")
   const [action, setAction] = useState("Degree");
+  const [loading,setLoading]=useState(false)
   const inputRef = useRef(null);
   function handleInput(value) {
     setDecimal(value)
@@ -73,7 +74,7 @@ export default function App() {
           <div className="btn operator" onClick={() => displayAction("/")}>/</div>
           <div className="btn btn0" onClick={() => displayAction("0")}>0</div>
           <div className="btn btn10" onClick={() => displayAction(".")}>.</div>
-          <div className="btn btn11" onClick={() => calculate(display)}>=</div>
+          <div className="btn btn11" onClick={() => calculate(display)}>{loading?"Calculating":"="}</div>
           <div className="btn operator" onClick={clearDisplay}>C</div>
           <div className="btn operator" onClick={() => displayAction("(")}>(</div>
           <div className="btn operator" onClick={() => displayAction(")")}> )</div>
@@ -99,6 +100,10 @@ export default function App() {
   }
 
   function calculate(display) {
+    if(!display){
+      return;
+    }
+    setLoading(true)
     if (action == "Radian") {
       radianfetch();
     }
@@ -120,7 +125,7 @@ export default function App() {
         }
       }).catch(err => {
         console.log("Error:", err)
-      })
+      }).finally(()=>setLoading(false))
   }
   function degreefetch() {
     fetch("https://calculator-70if.onrender.com/calculatedegree", {
@@ -136,7 +141,7 @@ export default function App() {
         }
       }).catch(err => {
         console.log("Error:", err)
-      })
+      }).finally(()=>setLoading(false))
   }
   function back() {
     if (display === "") {
