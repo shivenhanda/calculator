@@ -1,16 +1,16 @@
-import React, { lazy, useState,Suspense } from "react";
+import React, { lazy, useState, Suspense } from "react";
 import { useEffect } from "react";
 import "./index.css";
 import { useRef } from "react";
+const CalculatorResult = lazy(() => import("./CalculateResult"));
 
 export default function App() {
   const [display, setDisplay] = useState("");
   const [decimal, setDecimal] = useState(10);
   const [previousValue, setpreviousValue] = useState("")
   const [action, setAction] = useState("Degree");
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
   const inputRef = useRef(null);
-  const CalculatorResult = lazy(() => import("./CalculateResult"));
   function handleInput(value) {
     setDecimal(value)
     if (isNaN(value)) {
@@ -75,10 +75,19 @@ export default function App() {
           <div className="btn operator" onClick={() => displayAction("/")}>/</div>
           <div className="btn btn0" onClick={() => displayAction("0")}>0</div>
           <div className="btn btn10" onClick={() => displayAction(".")}>.</div>
-          <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>{loading?"Calculating":"="}</div>
-          {
-            loading?<CalculatorResult display={display} action={action} decimal={decimal} setDisplay={setDisplay} setpreviousValue={setpreviousValue} setLoading={setLoading}/>:""
-          }
+          <div className={`btn btn11 ${loading ? "disabled" : ""}`} onClick={() => calculate(display)}>{loading ? "Calculating" : "="}</div>
+          <Suspense fallback={null}>
+            {loading && (
+              <CalculatorResult
+                display={display}
+                action={action}
+                decimal={decimal}
+                setDisplay={setDisplay}
+                setpreviousValue={setpreviousValue}
+                setLoading={setLoading}
+              />
+            )}
+          </Suspense>
           <div className="btn operator" onClick={clearDisplay}>C</div>
           <div className="btn operator" onClick={() => displayAction("(")}>(</div>
           <div className="btn operator" onClick={() => displayAction(")")}> )</div>
@@ -104,7 +113,7 @@ export default function App() {
   }
 
   function calculate(display) {
-    if(!display){
+    if (!display || loading) {
       return;
     }
     setLoading(true)
